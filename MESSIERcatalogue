@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class MessierCatalogue {
+    private List<MessierObject> messierObjects;
+
+    // Constructors, getters, and setters
+
+    public double getAverageApparentMagnitude(String objectType) {
+        double sum = 0;
+        int count = 0;
+        for (MessierObject messierObject : messierObjects) {
+            if (messierObject.getType().equals(objectType)) {
+                sum += messierObject.getApparentMagnitude();
+                count++;
+            }
+        }
+        return sum / count;
+    }
+
+    public MessierObject getMostDistant(String objectType) {
+        MessierObject mostDistant = null;
+        for (MessierObject messierObject : messierObjects) {
+            if (messierObject.getType().equals(objectType)) {
+                if (mostDistant == null || messierObject.getDistance() > mostDistant.getDistance()) {
+                    mostDistant = messierObject;
+                }
+            }
+        }
+        return mostDistant;
+    }
+
+    public MessierObject getLowestDeclination(String constellation) {
+        MessierObject lowestDeclination = null;
+        for (MessierObject messierObject : messierObjects) {
+            if (messierObject.getConstellation().equals(constellation)) {
+                if (lowestDeclination == null || messierObject.getDeclination() < lowestDeclination.getDeclination()) {
+                    lowestDeclination = messierObject;
+                }
+            }
+        }
+        return lowestDeclination;
+    }
+
+    public MessierObject getClosestTo(int messierNumber) {
+        MessierObject closest = null;
+        MessierObject reference = null;
+        for (MessierObject messierObject : messierObjects) {
+            if (messierObject.getMessierNumber() == messierNumber) {
+                reference = messierObject;
+                break;
+            }
+        }
+        if (reference == null) return null;
+        double minDistance = Double.MAX_VALUE;
+        for (MessierObject
