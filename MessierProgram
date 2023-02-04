@@ -1,0 +1,84 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+class MessierObject implements Comparable<MessierObject> {
+    private int messierNumber;
+    private int NGCICNumber;
+    private String commonName;
+    private String type;
+    private double distance;
+    private String constellation;
+    private double apparentMagnitude;
+    private double rightAscension;
+    private double declination;
+
+    public MessierObject(int messierNumber, int NGCICNumber, String commonName,
+                         String type, double distance, String constellation, double apparentMagnitude,
+                         double rightAscension, double declination) {
+        this.messierNumber = messierNumber;
+        this.NGCICNumber = NGCICNumber;
+        this.commonName = commonName;
+        this.type = type;
+        this.distance = distance;
+        this.constellation = constellation;
+        this.apparentMagnitude = apparentMagnitude;
+        this.rightAscension = rightAscension;
+        this.declination = declination;
+    }
+
+    public int getMessierNumber() {
+        return messierNumber;
+    }
+
+    public int getNGCICNumber() {
+        return NGCICNumber;
+    }
+
+    public String getCommonName() {
+        return commonName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public String getConstellation() {
+        return constellation;
+    }
+
+    public double getApparentMagnitude() {
+        return apparentMagnitude;
+    }
+
+    public double getRightAscension() {
+        return rightAscension;
+    }
+
+    public double getDeclination() {
+        return declination;
+    }
+
+    @Override
+    public int compareTo(MessierObject o) {
+        return Double.compare(this.apparentMagnitude, o.apparentMagnitude);
+    }
+
+    @Override
+    public String toString() {
+        return "MessierObject{" +
+                "messierNumber=" + messierNumber +
+                ", NGCICNumber=" + NGCICNumber +
+                ", commonName='" + commonName + '\'' +
+                ", type='" + type + '\'' +
+                ", distance=" + distance +
+                ", constellation='" + constellation + '\'' +
+                ", apparentMagnitude=" + apparentMagnitude +
+                ", rightAscension=" + rightAscension +
+                ", declination=" + declination +
+                '}';
+    }
+}
