@@ -1,0 +1,44 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class MessierProgram {
+    public static void main(String[] args) {
+        try {
+            // Read in the Messier Catalogue from the file "messier.txt"
+            MessierCatalogue catalogue = MessierCatalogue.readFromFile(new File("messier.txt"));
+
+            // (a) Display the catalogue, arranged in order of ascending apparent magnitude (brightest object first)
+            System.out.println("Catalogue arranged in order of ascending apparent magnitude:");
+            List<MessierObject> sortedCatalogue = new ArrayList<>(catalogue.getMessierObjects());
+            Collections.sort(sortedCatalogue, (a, b) -> Double.compare(a.getApparentMagnitude(), b.getApparentMagnitude()));
+            for (MessierObject messierObject : sortedCatalogue) {
+                System.out.println(messierObject);
+            }
+
+            // (b) Display the average apparent magnitude of all open clusters
+            System.out.println("\nAverage apparent magnitude of all open clusters:");
+            double avgApparentMagnitude = catalogue.calculateAverageApparentMagnitudeOfOpenClusters();
+            System.out.println(avgApparentMagnitude);
+
+            // (c) Display the details of the most distant globular cluster
+            System.out.println("\nDetails of the most distant globular cluster:");
+            MessierObject mostDistantGlobularCluster = catalogue.findMostDistantGlobularCluster();
+            System.out.println(mostDistantGlobularCluster);
+
+            // (d) Display the details of the object in the constellation Sagittarius with the lowest declination
+            System.out.println("\nDetails of the object in the constellation Sagittarius with the lowest declination:");
+            MessierObject lowestDeclinationInSagittarius = catalogue.findLowestDeclinationInConstellation("Sagittarius");
+            System.out.println(lowestDeclinationInSagittarius);
+
+            // (e) Display the details of the object that is closest in the sky to M45
+            System.out.println("\nDetails of the object that is closest in the sky to M45:");
+            MessierObject closestObjectToM45 = catalogue.findClosestObjectTo("M45");
+            System.out.println(closestObjectToM45);
+        } catch (IOException e) {
+            System.out.println("Failed to read the Messier Catalogue from the file messier.txt: " + e.getMessage());
+        }
+    }
+}
